@@ -1,29 +1,43 @@
 {
   "name": "vue-smarthome",
   "version": "1.0.0",
-  "description": "Nuxt.js project",
-  "author": "Adrien REDON <redon.adrien@gmail.com>",
-  "private": true,
-  "dependencies": {
-    "@nuxtjs/pwa": "latest",
-    "axios": "^0.16.2",
-    "nuxt": "latest"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "start": "node dist/back/app.js",
+    "build:back": "babel src/back -d dist/back",
+    "build:front": "webpack",
+    "build": "npm run build:back && npm run build:front"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrienredon/vue-smarthome.git"
+  },
+  "keywords": [],
+  "author": "Adrien REDON",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrienredon/vue-smarthome/issues"
+  },
+  "homepage": "https://github.com/adrienredon/vue-smarthome#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^5.0.1",
+    "dotenv-webpack": "^1.5.5",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.1",
+    "raspicam": "^0.2.14"
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "eslint": "^3.15.0",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-html": "^2.0.0",
-    "eslint-plugin-promise": "^3.4.1",
-    "eslint-plugin-standard": "^2.0.1"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
   }
 }
