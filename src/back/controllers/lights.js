@@ -8,10 +8,8 @@ const router = express.Router();
 
 router.route('/lights')
   .get(isAuthenticated, (req, res) => {
-    console.log('get lights');
     lights.getState()
       .then(state => {
-        console.log(state);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(state));
       })
@@ -28,6 +26,13 @@ router.route('/lights')
         .then(() => {
           res.status(200).end();
         })
+    })
+    .delete(isAuthenticated, (req, res) => {
+      console.log(req.params.id);
+      lights.turnOff(req.params.id)
+        .then(() => {
+          res.status(200).end();
+        });
     });
 
 module.exports = router;

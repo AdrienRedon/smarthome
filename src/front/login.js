@@ -1,9 +1,8 @@
 import axios from 'axios';
-import state from './store';
 import { url } from './helpers';
+import lights from './lights';
 
 const $form = document.querySelector('#loginForm');
-const $lights = document.querySelector('#lights');
 
 function login(password) {
   const data = {
@@ -12,12 +11,16 @@ function login(password) {
 
   axios.post(`${url}/login`, data)
     .then(() => {
-      console.log('successfully logged in');
-      state.set('password', password);
       $form.classList.add('hidden');
-      $lights.classList.remove('hidden');
+      lights.displayAll();
     });
 }
+
+axios.get(`${url}/login`)
+  .then(() => {
+    $form.classList.add('hidden');
+    lights.displayAll();
+  });
 
 $form.addEventListener('submit', (event) => {
   event.preventDefault();

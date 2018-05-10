@@ -2,10 +2,14 @@
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const isAuthenticated = require('../middlewares/auth');
 
 const router = express.Router();
 
 router.route('/login')
+  .get(isAuthenticated, (req, res) => {
+    res.status(200).end();
+  })
   .post((req, res) => {
     const password = req.body['password'];
     if (password !== process.env.PASSWORD) {

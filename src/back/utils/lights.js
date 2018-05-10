@@ -13,10 +13,10 @@ module.exports = {
   turnOn (lightId, color) {
     const data = this.color.find(key => key === color) || {on: true};
 
-    axios.put(`${this.apiLights}/${lightId}/state`, data);
+    return axios.put(`${this.apiLights}/${lightId}/state`, data);
   },
   turnOff (lightId) {
-    axios.put(`${this.apiLights}/${lightId}/state`, {on: false});
+    return axios.put(`${this.apiLights}/${lightId}/state`, {on: false});
   },
   getState () {
     return axios.get(this.apiLights).then(response => response.data);

@@ -9,8 +9,6 @@ const cookieParser = require('cookie-parser');
 const authController = require('./controllers/auth');
 const lightsController = require('./controllers/lights');
 const cameraController = require('./controllers/camera');
-const authenticationMiddleware = require('./middlewares/authentication');
-const jwtOpts = require('./jwt');
 
 const app = express();
 app.use(bodyParser.json());
