@@ -13,9 +13,25 @@ module.exports = {
   turnOn (lightId, color) {
     const data = this.color.find(key => key === color) || {on: true};
 
+    if (!lightId) {
+      return this.getState()
+        .then(state => {
+          Object.keys(state).forEach(light => {
+            axios.put(`${this.apiLights}/${light}/state`, data);
+          });
+        });
+    }
     return axios.put(`${this.apiLights}/${lightId}/state`, data);
   },
   turnOff (lightId) {
+    if (!lightId) {
+      return this.getState()
+        .then(state => {
+          Object.keys(state).forEach(light => {
+            axios.put(`${this.apiLights}/${light}/state`, {on: false});
+          });
+        });
+    }
     return axios.put(`${this.apiLights}/${lightId}/state`, {on: false});
   },
   getState () {
