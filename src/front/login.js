@@ -12,11 +12,7 @@ function displayLoggedIn() {
 }
 
 function login(password) {
-  const data = {
-    password,
-  };
-
-  axios.post(`${url}/login`, data)
+  axios.post(`${url}/login`, {password})
     .then(displayLoggedIn)
     .catch(() => {
       console.log('wrong credentials');
