@@ -19,16 +19,14 @@ router.route('/lights')
       })
   });
 
-  router.route('/lights/:id')
+  router.route('/lights/:id?')
     .put(isAuthenticated, (req, res) => {
-      console.log(req.params.id);
       lights.turnOn(req.params.id)
         .then(() => {
           res.status(200).end();
         })
     })
     .delete(isAuthenticated, (req, res) => {
-      console.log(req.params.id);
       lights.turnOff(req.params.id)
         .then(() => {
           res.status(200).end();

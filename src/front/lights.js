@@ -2,13 +2,14 @@ import axios from 'axios';
 import { url } from './helpers';
 
 const $lights = document.querySelector('#lights');
+let lights;
 
 function displayAll() {
   $lights.innerHTML = '';
 
   axios.get(`${url}/lights`)
     .then((response) => {
-      const lights = response.data;
+      lights = response.data;
 
       Object.keys(lights).forEach((key) => {
         const light = lights[key];
@@ -20,28 +21,35 @@ function displayAll() {
 
       document.querySelectorAll('.btn-on').forEach(btn => {
         btn.addEventListener('click', (el) => {
-          turnOn(el.target.dataset.id)
-            .then(() => displayAll());
+          turnOn(el.target.dataset.id);
         });
       });
 
       document.querySelectorAll('.btn-off').forEach(btn => {
         btn.addEventListener('click', (el) => {
-          turnOff(el.target.dataset.id)
-            .then(() => displayAll());
+          turnOff(el.target.dataset.id);
         });
       });
     });
 }
 
 function turnOn(id) {
-  return axios.put(`${url}/lights/${id}`);
+  return axios.put(`${url}/lights/${id || ''}`)
+    .then(displayAll);
 }
 
 function turnOff(id) {
-  return axios.delete(`${url}/lights/${id}`);
+  return axios.delete(`${url}/lights/${id || ''}`)
+    .then(displayAll);
+}
+
+function getIdByName(name) {
+  return Object.keys(lights).find((key) => lights[key].name.toUpperCase() === name.toUpperCase());
 }
 
 export default {
   displayAll,
+  turnOn,
+  turnOff,
+  getIdByName,
 };

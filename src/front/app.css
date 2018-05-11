@@ -1,3 +1,33 @@
 .hidden {
   display: none;
 }
+
+.ic-voice-container {
+  padding: 0;
+  border-radius: 50%;
+  background: #465565;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.78);
+  margin: 16px;
+  height: 56px;
+  width: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+.ic-voice-container.active {
+  background-color: #6FB485;
+}
+.ic-voice-container:focus {
+  outline: 0;
+}
+.ic-voice-container:active {
+  background-color: #29333D;
+}
+.ic-voice {
+  height: 56px;
+  width: 56px;
+}

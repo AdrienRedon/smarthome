@@ -3,6 +3,13 @@ import { url } from './helpers';
 import lights from './lights';
 
 const $form = document.querySelector('#loginForm');
+const $voice = document.querySelector('#voice');
+
+function displayLoggedIn() {
+  $form.classList.add('hidden');
+  $voice.classList.remove('hidden');
+  lights.displayAll();
+}
 
 function login(password) {
   const data = {
@@ -10,16 +17,17 @@ function login(password) {
   };
 
   axios.post(`${url}/login`, data)
-    .then(() => {
-      $form.classList.add('hidden');
-      lights.displayAll();
+    .then(displayLoggedIn)
+    .catch(() => {
+      console.log('wrong credentials');
     });
 }
 
+// check if already logged in
 axios.get(`${url}/login`)
-  .then(() => {
-    $form.classList.add('hidden');
-    lights.displayAll();
+  .then(displayLoggedIn)
+  .catch(() => {
+    console.log('You are not logged in yet');
   });
 
 $form.addEventListener('submit', (event) => {
